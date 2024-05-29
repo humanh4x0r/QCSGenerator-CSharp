@@ -1,0 +1,48 @@
+@startuml QCSGenerator
+|Costruttore|
+start
+:Costruttore di QCSGenerator;
+if (seed è null?) then (sì)
+  :Imposta seed all'ora corrente;
+else (no)
+  :Imposta seed al valore dato;
+endif
+:Seed = Abs(seed) % lunghezzaDiTuttiICaratteri;
+:Inizializza array state con Complex[1, 0] all'indice di seed;
+
+|Generazione di Numeri Casuali|
+:Metodo GenerateRandom;
+:Definisci HMatrix;
+repeat
+  :Ciclo attraverso l'array state in passi di 2;
+  if (i non è metà della lunghezza dell'array) then (sì)
+    :Applica HMatrix al segmento di state;
+    :Trasforma il segmento di state;
+  endif
+repeat while (i < lunghezza dell'array)
+:Calcola le probabilità di misurazione;
+:Campiona dalla distribuzione;
+repeat
+  :Ciclo attraverso l'array state in passi di 2;
+  if (i non è metà della lunghezza dell'array) then (sì)
+    :Applica la trasposizione coniugata di HMatrix al segmento di state;
+    :Trasforma il segmento di state;
+  endif
+repeat while (i < lunghezza dell'array)
+:Ritorna il valore casuale campionato;
+
+|Generazione di Stringhe|
+:Metodo GenerateString;
+:Genera una lunghezza casuale tra 25 e 30 inclusi;
+:Genera caratteri casuali;
+:Ritorna la stringa generata;
+:Metodo WriteStringToFile;
+:Aggiungi stringa al file "strings.txt";
+:Metodo GenerateStrings;
+repeat
+  :Ciclo per count volte;
+  :Genera stringa;
+  :Scrivi stringa su file;
+repeat while (i < count)
+stop
+@enduml
